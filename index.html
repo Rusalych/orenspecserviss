@@ -2,40 +2,38 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#0b0b0d" />
 
   <title>ОренСпецСервис — ритуальные услуги в Оренбурге и области</title>
-  <meta name="description" content="ОренСпецСервис — уважительная организация похорон и прощаний в Оренбурге и области. Прозрачная смета, договор, помощь с документами. 24/7: звонок, WhatsApp, Telegram." />
+  <meta name="description" content="ОренСпецСервис — уважительная организация похорон и прощаний в Оренбурге и области. Помощь с документами, транспорт, зал прощания, венки/цветы. Прозрачная смета и договор. Связь 24/7." />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="ОренСпецСервис — ритуальные услуги в Оренбурге и области" />
-  <meta property="og:description" content="Организация похорон под ключ. Помощь с документами, транспорт, зал прощания, венки/цветы. Прозрачно и спокойно. Связь 24/7." />
+  <meta property="og:description" content="Организация похорон под ключ. Документы, транспорт, зал прощания, цветы. Спокойно, прозрачно, по шагам. Связь 24/7." />
   <meta property="og:image" content="https://source.unsplash.com/1600x900/?candle,flowers,soft" />
   <meta property="og:locale" content="ru_RU" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="preconnect" href="https://source.unsplash.com" />
   <link rel="preconnect" href="https://images.unsplash.com" />
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+  <link rel="dns-prefetch" href="https://www.google.com" />
 
   <style>
     :root{
       --bg:#0b0b0d;
       --bg2:#0f0f12;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.08);
-      --stroke: rgba(255,255,255,.12);
-      --stroke2: rgba(255,255,255,.18);
-
       --white:#ffffff;
       --black:#0b0b0d;
       --red:#c1121f;
       --red2:#ff2a3c;
+      --gray:#b9b9bf;
 
-      --gray:#b9b9bf; /* нейтральный серый для текста */
-      --muted: rgba(255,255,255,.72);
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --stroke2: rgba(255,255,255,.18);
 
       --shadow: 0 20px 60px rgba(0,0,0,.55);
       --shadow2: 0 12px 36px rgba(0,0,0,.45);
@@ -54,31 +52,53 @@
     body{
       margin:0;
       color:var(--white);
-      background:
-        radial-gradient(1200px 800px at 18% 12%, rgba(193,18,31,.20), transparent 60%),
-        radial-gradient(1000px 700px at 82% 18%, rgba(255,42,60,.14), transparent 55%),
-        radial-gradient(900px 600px at 52% 92%, rgba(255,255,255,.06), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+      background: linear-gradient(180deg, var(--bg), var(--bg2));
       font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
       letter-spacing: .2px;
       overflow-x:hidden;
     }
-
     a{color:inherit; text-decoration:none}
     .container{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    /* accessibility */
+    /* A11y */
     :focus-visible{outline: 2px solid rgba(255,42,60,.85); outline-offset: 3px; border-radius: 10px}
     .sr-only{
       position:absolute; width:1px; height:1px; padding:0; margin:-1px;
       overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
     }
 
+    /* ===== Floating background (canvas + gradients) ===== */
+    .bg-wrap{
+      position:fixed; inset:0; z-index:-2; pointer-events:none;
+      background:
+        radial-gradient(1100px 700px at 18% 12%, rgba(193,18,31,.22), transparent 60%),
+        radial-gradient(900px 640px at 82% 18%, rgba(255,42,60,.14), transparent 55%),
+        radial-gradient(900px 600px at 52% 92%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      animation: drift 16s var(--ease) infinite alternate;
+    }
+    #bgCanvas{
+      position:absolute; inset:0; width:100%; height:100%;
+      opacity:.75;
+      filter: blur(.0px);
+    }
+    .bg-vignette{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(1200px 700px at 50% 10%, rgba(0,0,0,.18), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.62));
+      opacity:.9;
+    }
+    @keyframes drift{
+      from{filter: saturate(1.0) contrast(1.02)}
+      to{filter: saturate(1.06) contrast(1.04)}
+    }
+
     /* header */
     header{
       position:sticky; top:0; z-index:50;
       backdrop-filter: blur(12px);
-      background: linear-gradient(180deg, rgba(11,11,13,.78), rgba(11,11,13,.48));
+      background: linear-gradient(180deg, rgba(11,11,13,.82), rgba(11,11,13,.55));
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .nav{
@@ -118,8 +138,8 @@
       transition: background .25s var(--ease), color .25s var(--ease);
     }
     nav a:hover{background: rgba(255,255,255,.06); color: rgba(255,255,255,.95)}
-    .nav-cta{display:flex; gap:10px; align-items:center;}
 
+    .nav-cta{display:flex; gap:10px; align-items:center;}
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding: 11px 14px;
@@ -134,7 +154,7 @@
       user-select:none;
       white-space:nowrap;
     }
-    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); box-shadow: 0 12px 36px rgba(0,0,0,.45)}
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); box-shadow: var(--shadow2)}
     .btn:active{transform: translateY(0px) scale(.99)}
     .btn.primary{
       background: linear-gradient(135deg, rgba(193,18,31,.98), rgba(255,42,60,.55));
@@ -154,8 +174,38 @@
       font-size: 12px;
     }
 
+    /* Mobile nav */
+    .burger{
+      display:none;
+      width:42px; height:42px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      cursor:pointer;
+      transition: transform .18s var(--ease), background .25s var(--ease);
+    }
+    .burger:hover{transform: translateY(-1px); background: rgba(255,255,255,.08)}
+    .mobile-menu{
+      display:none;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(11,11,13,.62);
+      backdrop-filter: blur(14px);
+    }
+    .mobile-menu.open{display:block}
+    .mobile-menu .inner{padding: 10px 0 14px}
+    .mobile-menu a{
+      display:flex;
+      padding: 12px 14px;
+      border-radius: 14px;
+      margin: 6px 0;
+      color: rgba(255,255,255,.90);
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+    }
+
     /* hero */
-    .hero{position:relative; padding: 34px 0 10px;}
+    .hero{position:relative; padding: 34px 0 12px;}
     .hero-grid{
       display:grid;
       grid-template-columns: 1.15fr .85fr;
@@ -172,31 +222,36 @@
     }
     h1{
       margin: 0 0 14px;
-      font-size: clamp(34px, 4.2vw, 54px);
+      font-size: clamp(32px, 4.2vw, 54px);
       line-height: 1.05;
       letter-spacing: -.6px;
     }
-    .lead{margin: 0 0 22px; color: rgba(255,255,255,.80); font-size: 16px; max-width: 58ch;}
-    .hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 20px;}
+    .lead{margin: 0 0 22px; color: rgba(255,255,255,.82); font-size: 16px; max-width: 60ch;}
+    .hero-actions{display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 18px;}
     .meta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top: 8px;}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.84);
+      font-size: 12px;
+    }
 
     .hero-right{
       position:relative;
       border-radius: var(--r28);
       overflow:hidden;
       border: 1px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(900px 500px at 50% 10%, rgba(255,255,255,.11), transparent 60%),
-        radial-gradient(700px 420px at 72% 82%, rgba(255,42,60,.15), transparent 60%),
-        rgba(255,255,255,.03);
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      background: rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
       min-height: 560px;
     }
-    /* ✅ ТВОЁ 1 ФОТО: hero фон */
     .hero-media{
       position:absolute; inset:0;
       background:
-        linear-gradient(180deg, rgba(11,11,13,.20), rgba(11,11,13,.70)),
+        linear-gradient(180deg, rgba(11,11,13,.22), rgba(11,11,13,.78)),
         url("assets/img/hero.jpg") center/cover no-repeat;
       filter: saturate(.92) contrast(1.03);
       transform: scale(1.02);
@@ -205,35 +260,19 @@
       position:absolute; inset: 16px;
       border-radius: 24px;
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(11,11,13,.18);
+      background: rgba(11,11,13,.20);
       backdrop-filter: blur(14px);
       overflow:hidden;
     }
-    #threeWrap{position:absolute; inset:0; display:flex; align-items:stretch; justify-content:stretch;}
-    #threeCanvas{width:100%; height:100%; display:block;}
-    .webgl-fallback{
+    .hero-overlay{
       position:absolute; inset:0;
-      display:none;
-      align-items:center; justify-content:center;
-      padding:22px;
-      text-align:center;
-      color: rgba(255,255,255,.86);
       background:
-        radial-gradient(340px 240px at 30% 30%, rgba(255,255,255,.12), transparent 70%),
-        radial-gradient(520px 420px at 70% 70%, rgba(255,42,60,.16), transparent 70%),
-        rgba(11,11,13,.35);
+        radial-gradient(700px 420px at 24% 30%, rgba(255,255,255,.09), transparent 60%),
+        radial-gradient(700px 520px at 78% 70%, rgba(255,42,60,.14), transparent 62%);
+      mix-blend-mode: screen;
+      opacity:.75;
+      pointer-events:none;
     }
-    .fallback-card{
-      max-width: 360px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      backdrop-filter: blur(12px);
-      padding: 16px 16px 14px;
-    }
-    .fallback-card b{display:block; font-size:14px; margin-bottom:8px}
-    .fallback-card p{margin:0; color: rgba(255,255,255,.78); font-size:13px}
-
     .hero-badge{
       position:absolute; left: 22px; bottom: 22px;
       right: 22px;
@@ -241,7 +280,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       align-items: stretch;
-      pointer-events:none;
     }
     .mini{
       border-radius: 18px;
@@ -249,10 +287,11 @@
       background: rgba(255,255,255,.06);
       backdrop-filter: blur(12px);
       padding: 12px 12px 11px;
-      pointer-events:auto;
     }
     .mini b{font-size: 13px}
     .mini p{margin:6px 0 0; color: rgba(255,255,255,.78); font-size:12px}
+    .divider{height:1px; background: rgba(255,255,255,.10); margin: 16px 0 0;}
+    .hint{color: rgba(255,255,255,.66); font-size: 12px; margin-top: 10px;}
 
     /* section base */
     section{padding: 74px 0}
@@ -263,8 +302,7 @@
       line-height:1.15;
       letter-spacing: -.3px;
     }
-    .section-head p{margin:0; color: rgba(255,255,255,.74); max-width: 62ch; font-size: 14px;}
-    .divider{height:1px; background: rgba(255,255,255,.10); margin: 16px 0 0;}
+    .section-head p{margin:0; color: rgba(255,255,255,.76); max-width: 64ch; font-size: 14px;}
 
     /* reveal */
     .reveal{
@@ -288,7 +326,7 @@
         radial-gradient(900px 600px at 20% 20%, rgba(255,255,255,.10), transparent 60%),
         radial-gradient(600px 500px at 85% 80%, rgba(255,42,60,.14), transparent 60%),
         rgba(255,255,255,.04);
-      box-shadow: 0 12px 36px rgba(0,0,0,.45);
+      box-shadow: var(--shadow2);
       overflow:hidden;
       position:relative;
       min-height: 420px;
@@ -296,7 +334,7 @@
     .services-feature .bg{
       position:absolute; inset:0;
       background:
-        linear-gradient(180deg, rgba(11,11,13,.20), rgba(11,11,13,.82)),
+        linear-gradient(180deg, rgba(11,11,13,.20), rgba(11,11,13,.84)),
         url("https://source.unsplash.com/1600x1100/?flowers,soft,detail") center/cover no-repeat;
       filter: saturate(.92) contrast(1.02);
       transform: scale(1.03);
@@ -308,7 +346,7 @@
       height:100%;
     }
     .services-feature .content h3{margin: 0; font-size: 18px; letter-spacing: -.2px;}
-    .services-feature .content p{margin:0; color: rgba(255,255,255,.76); max-width: 62ch; font-size: 14px;}
+    .services-feature .content p{margin:0; color: rgba(255,255,255,.78); max-width: 62ch; font-size: 14px;}
     .services-feature .strip{margin-top:auto; display:flex; gap:10px; flex-wrap:wrap;}
 
     .services-grid{
@@ -325,7 +363,7 @@
       position:relative;
       overflow:hidden;
       transition: transform .2s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
-      min-height: 130px;
+      min-height: 132px;
     }
     .svc:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.20); background: rgba(255,255,255,.07);}
     .svc:before{
@@ -336,7 +374,7 @@
       transform: rotate(22deg);
     }
     .svc b{display:block; font-size: 13px; letter-spacing: .1px}
-    .svc p{margin:8px 0 0; color: rgba(255,255,255,.74); font-size: 12.5px}
+    .svc p{margin:8px 0 0; color: rgba(255,255,255,.76); font-size: 12.8px}
 
     /* pricing */
     .pricing{
@@ -352,20 +390,20 @@
       overflow:hidden;
     }
     .price-table header{
-      position:relative;
-      background: linear-gradient(135deg, rgba(193,18,31,.35), rgba(255,255,255,.04));
+      background: linear-gradient(135deg, rgba(193,18,31,.32), rgba(255,255,255,.04));
       border-bottom: 1px solid rgba(255,255,255,.10);
       padding: 16px 16px 14px;
       backdrop-filter: blur(12px);
     }
     .price-table header h3{margin:0; font-size: 16px}
-    .price-table header p{margin:6px 0 0; color: rgba(255,255,255,.74); font-size: 13px}
+    .price-table header p{margin:6px 0 0; color: rgba(255,255,255,.76); font-size: 13px}
     table{width:100%; border-collapse: collapse;}
     th,td{padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,.08); vertical-align: top; font-size: 13px;}
-    th{text-align:left; color: rgba(255,255,255,.85); font-weight: 700; background: rgba(255,255,255,.02);}
-    td{color: rgba(255,255,255,.72)}
-    .tick{color: rgba(255,255,255,.86)}
-    .subnote{padding: 12px 14px 14px; color: rgba(255,255,255,.70); font-size: 12px;}
+    th{text-align:left; color: rgba(255,255,255,.88); font-weight: 800; background: rgba(255,255,255,.02);}
+    td{color: rgba(255,255,255,.74)}
+    .tick{color: rgba(255,255,255,.90)}
+    .subnote{padding: 12px 14px 14px; color: rgba(255,255,255,.72); font-size: 12px;}
+
     .cards{display:grid; gap: 12px;}
     .card{
       border-radius: var(--r20);
@@ -377,18 +415,9 @@
       overflow:hidden;
     }
     .card h3{margin:0; font-size: 14px}
-    .card p{margin:8px 0 0; color: rgba(255,255,255,.74); font-size: 13px}
+    .card p{margin:8px 0 0; color: rgba(255,255,255,.76); font-size: 13px}
     .budget{display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px;}
     .budget .btn{font-size: 12.5px; padding: 10px 12px}
-    .badge{
-      display:inline-flex; align-items:center; gap:8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.80);
-      font-size: 12px;
-    }
 
     /* how */
     .how{
@@ -397,14 +426,13 @@
       gap: 18px;
       align-items:stretch;
     }
-    /* ✅ ТВОЁ 2 ФОТО: блок "Как мы работаем" */
     .how-photo{
       border-radius: var(--r28);
       border: 1px solid rgba(255,255,255,.12);
       background:
-        linear-gradient(180deg, rgba(11,11,13,.20), rgba(11,11,13,.80)),
+        linear-gradient(180deg, rgba(11,11,13,.22), rgba(11,11,13,.86)),
         url("assets/img/how.jpg") center/cover no-repeat;
-      box-shadow: 0 12px 36px rgba(0,0,0,.45);
+      box-shadow: var(--shadow2);
       min-height: 420px;
       position:relative;
       overflow:hidden;
@@ -430,18 +458,18 @@
       background: linear-gradient(180deg, rgba(255,42,60,.55), rgba(255,255,255,.06));
       opacity:.9;
     }
-    .step{display:grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 12px 6px; position:relative;}
+    .step{display:grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 12px 6px;}
     .num{
       width: 34px; height: 34px; border-radius: 12px;
       display:flex; align-items:center; justify-content:center;
       background: rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.14);
       color: rgba(255,255,255,.92);
-      font-weight: 750;
+      font-weight: 850;
       font-size: 13px;
     }
     .step b{display:block; font-size: 13.5px}
-    .step p{margin:7px 0 0; color: rgba(255,255,255,.74); font-size: 13px}
+    .step p{margin:7px 0 0; color: rgba(255,255,255,.76); font-size: 13px}
 
     /* docs */
     .docs{display:grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items:start;}
@@ -477,15 +505,15 @@
       opacity:.7;
     }
     .li b{display:block; font-size: 13px}
-    .li span{display:block; margin-top:4px; color: rgba(255,255,255,.72); font-size: 12.5px}
+    .li span{display:block; margin-top:4px; color: rgba(255,255,255,.74); font-size: 12.6px}
     .doc-photo{
       border-radius: var(--r28);
       border:1px solid rgba(255,255,255,.12);
       background:
-        linear-gradient(180deg, rgba(11,11,13,.18), rgba(11,11,13,.78)),
+        linear-gradient(180deg, rgba(11,11,13,.18), rgba(11,11,13,.84)),
         url("https://source.unsplash.com/1500x1100/?paper,document,desk,minimal") center/cover no-repeat;
       min-height: 360px;
-      box-shadow: 0 12px 36px rgba(0,0,0,.45);
+      box-shadow: var(--shadow2);
       position:relative;
       overflow:hidden;
     }
@@ -520,8 +548,8 @@
     .ph:after{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(180deg, rgba(11,11,13,.05), rgba(11,11,13,.30));
-      opacity:.9;
+      background: linear-gradient(180deg, rgba(11,11,13,.06), rgba(11,11,13,.32));
+      opacity:.92;
     }
     .span-4{grid-column: span 4}
     .span-3{grid-column: span 3}
@@ -537,7 +565,7 @@
       top: 92px;
     }
     .gallery-side h3{margin:0; font-size: 15px}
-    .gallery-side p{margin:8px 0 0; color: rgba(255,255,255,.74); font-size: 13px}
+    .gallery-side p{margin:8px 0 0; color: rgba(255,255,255,.76); font-size: 13px}
     .gallery-side .pill{margin-top: 12px; display:flex; gap:8px; flex-wrap:wrap;}
 
     /* reviews */
@@ -558,11 +586,11 @@
       font-size: 64px;
       line-height:1;
       color: rgba(255,255,255,.10);
-      font-weight: 800;
+      font-weight: 900;
     }
-    .quote p{margin:0; color: rgba(255,255,255,.78); font-size: 13.5px}
+    .quote p{margin:0; color: rgba(255,255,255,.80); font-size: 13.6px}
     .quote b{display:block; margin-top: 10px; font-size: 13px}
-    .quote small{display:block; margin-top:3px; color: rgba(255,255,255,.60); font-size: 12px}
+    .quote small{display:block; margin-top:3px; color: rgba(255,255,255,.62); font-size: 12px}
 
     /* FAQ */
     .faq{border-radius: var(--r28); border:1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); overflow:hidden;}
@@ -578,7 +606,7 @@
       display:flex; justify-content:space-between; align-items:center;
       gap: 14px;
       cursor:pointer;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13.5px;
     }
     .chev{
@@ -590,42 +618,37 @@
       flex:0 0 auto;
     }
     .a{max-height:0; overflow:hidden; transition: max-height .35s var(--ease);}
-    .a > div{padding: 0 16px 14px; color: rgba(255,255,255,.74); font-size: 13px;}
-    .qa.open .a{max-height: 260px}
+    .a > div{padding: 0 16px 14px; color: rgba(255,255,255,.76); font-size: 13px;}
+    .qa.open .a{max-height: 280px}
     .qa.open .chev{transform: rotate(180deg)}
 
-    /* contacts */
+    /* contacts + map */
     .contact{display:grid; grid-template-columns: 1.05fr .95fr; gap: 14px; align-items:start;}
-    .map{
+    .mapWrap{
       border-radius: var(--r28);
       border:1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(520px 260px at 18% 30%, rgba(255,255,255,.10), transparent 60%),
-        radial-gradient(720px 480px at 80% 80%, rgba(255,42,60,.16), transparent 60%),
-        rgba(255,255,255,.04);
+      background: rgba(255,255,255,.04);
       overflow:hidden;
       min-height: 420px;
+      box-shadow: var(--shadow2);
       position:relative;
-      box-shadow: 0 12px 36px rgba(0,0,0,.45);
     }
-    .map .overlay{
-      position:absolute; inset:0;
-      background:
-        linear-gradient(180deg, rgba(11,11,13,.15), rgba(11,11,13,.82)),
-        url("https://source.unsplash.com/1600x1100/?city,night,soft,street") center/cover no-repeat;
-      filter: saturate(.88) contrast(1.02);
-      transform: scale(1.02);
+    .mapTop{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 12px 12px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
     }
-    .map .label{
-      position:absolute; left: 16px; right: 16px; bottom: 16px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(11,11,13,.28);
-      backdrop-filter: blur(14px);
-      padding: 14px;
+    .mapTop b{font-size: 13px}
+    .mapTop .row{margin:0}
+    iframe.mapFrame{
+      width:100%;
+      height: 380px;
+      border:0;
+      display:block;
+      background: rgba(0,0,0,.2);
     }
-    .label b{display:block; font-size: 13.5px}
-    .label p{margin:8px 0 0; color: rgba(255,255,255,.74); font-size: 13px}
+
     .cols{display:grid; gap: 12px;}
     .panel{
       border-radius: var(--r28);
@@ -634,12 +657,12 @@
       padding: 16px;
     }
     .panel h3{margin:0; font-size: 15px}
-    .panel p{margin:8px 0 0; color: rgba(255,255,255,.74); font-size: 13px}
+    .panel p{margin:8px 0 0; color: rgba(255,255,255,.76); font-size: 13px}
     .row{display:flex; gap: 10px; flex-wrap:wrap; margin-top: 12px;}
 
     form{margin-top: 12px; display:grid; gap: 10px;}
     .field{display:grid; gap: 6px;}
-    label{font-size: 12px; color: rgba(255,255,255,.74)}
+    label{font-size: 12px; color: rgba(255,255,255,.76)}
     input, textarea{
       width:100%;
       padding: 12px 12px;
@@ -654,17 +677,16 @@
     input:focus, textarea:focus{border-color: rgba(255,42,60,.55); background: rgba(255,255,255,.06);}
     textarea{min-height: 92px; resize: vertical}
     .form-actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top: 4px;}
-    .hint{color: rgba(255,255,255,.62); font-size: 12px; margin-top: 8px;}
 
     /* footer */
     footer{
-      padding: 34px 0 40px;
+      padding: 34px 0 90px;
       border-top: 1px solid rgba(255,255,255,.10);
       background: rgba(0,0,0,.12);
     }
     .foot{display:grid; grid-template-columns: 1.05fr .95fr; gap: 14px; align-items:start;}
-    .fine{color: rgba(255,255,255,.62); font-size: 12px; margin-top: 12px;}
-    .fine a{color: rgba(255,255,255,.74); text-decoration: underline; text-decoration-color: rgba(255,255,255,.24)}
+    .fine{color: rgba(255,255,255,.64); font-size: 12px; margin-top: 12px;}
+    .fine a{color: rgba(255,255,255,.78); text-decoration: underline; text-decoration-color: rgba(255,255,255,.24)}
     .req{
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.12);
@@ -672,7 +694,7 @@
       padding: 14px;
     }
     .req b{display:block; font-size: 13px}
-    .req ul{margin:10px 0 0; padding-left: 18px; color: rgba(255,255,255,.72); font-size: 12.5px}
+    .req ul{margin:10px 0 0; padding-left: 18px; color: rgba(255,255,255,.74); font-size: 12.6px}
     .req li{margin:6px 0}
 
     /* lightbox */
@@ -690,7 +712,7 @@
       border:1px solid rgba(255,255,255,.16);
       background: rgba(11,11,13,.55);
       backdrop-filter: blur(14px);
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
@@ -708,17 +730,44 @@
       cursor:pointer;
       transition: transform .18s var(--ease), background .25s var(--ease);
       color: rgba(255,255,255,.92);
-      font-weight: 700;
+      font-weight: 800;
       font-size: 13px;
     }
     .lb-close:hover{transform: translateY(-1px); background: rgba(255,255,255,.08)}
     .lb-img{width:100%; height: min(70vh, 680px); display:block; object-fit: cover;}
 
+    /* Mobile bottom bar */
+    .mobileBar{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:70;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: rgba(11,11,13,.70);
+      backdrop-filter: blur(14px);
+      border-top: 1px solid rgba(255,255,255,.10);
+      display:none;
+    }
+    .mobileBar .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .mobileBar .btn{
+      width:100%;
+      padding: 12px 12px;
+      justify-content:center;
+      font-size: 13px;
+      border-radius: 16px;
+    }
+
     /* responsive */
     @media (max-width: 980px){
       nav ul{display:none}
+      .burger{display:inline-flex; align-items:center; justify-content:center}
       .hero-grid{grid-template-columns: 1fr; min-height: unset}
-      .hero-right{min-height: 520px}
+      .hero-right{min-height: 420px}
       .services-wrap, .pricing, .how, .docs, .gallery, .contact, .foot{grid-template-columns: 1fr}
       .gallery-side{position:relative; top:auto}
       .hero-badge{grid-template-columns: 1fr}
@@ -727,15 +776,20 @@
       .span-3{grid-column: span 2}
       .span-2{grid-column: span 2}
       .tall{grid-row: span 2}
+      .mobileBar{display:block}
     }
     @media (max-width: 520px){
       .nav{height: 76px}
       .brand{min-width:auto}
       .btn{padding: 11px 12px}
+      .hero-left{padding-top: 18px}
+      .lead{font-size: 15.5px}
+      .hero-actions .btn{flex:1 1 auto}
       .masonry{grid-template-columns: repeat(2, 1fr)}
       .span-4,.span-3,.span-2{grid-column: span 2}
       .tall{grid-row: span 1; min-height: 180px}
       .hero-media{transform:none}
+      iframe.mapFrame{height: 320px}
     }
 
     /* reduced motion */
@@ -748,6 +802,8 @@
       .chev{transition:none}
       .a{transition:none}
       .hero-media{transform:none}
+      .bg-wrap{animation:none}
+      #bgCanvas{display:none}
     }
   </style>
 
@@ -778,6 +834,11 @@
 </head>
 
 <body>
+  <div class="bg-wrap" aria-hidden="true">
+    <canvas id="bgCanvas"></canvas>
+    <div class="bg-vignette"></div>
+  </div>
+
   <a class="sr-only" href="#main">Перейти к содержимому</a>
 
   <header>
@@ -787,7 +848,7 @@
           <span class="mark" aria-hidden="true"></span>
           <span>
             <b>ОренСпецСервис</b>
-            <small>Оренбург • Ритуальные услуги • 24/7</small>
+            <small id="topLine">Оренбург • Ритуальные услуги • 24/7</small>
           </span>
         </a>
 
@@ -808,8 +869,21 @@
             ☎ <span>Позвонить</span>
           </a>
           <a class="btn primary" href="#contact" aria-label="Перейти к заявке">
-            <span>Нужна помощь сейчас</span> <span aria-hidden="true">→</span>
+            <span>Нужна помощь</span> <span aria-hidden="true">→</span>
           </a>
+          <button class="burger" id="burger" type="button" aria-label="Открыть меню">☰</button>
+        </div>
+      </div>
+
+      <div class="mobile-menu" id="mobileMenu" aria-label="Мобильное меню">
+        <div class="inner container">
+          <a href="#services">Услуги</a>
+          <a href="#pricing">Пакеты</a>
+          <a href="#how">Как работаем</a>
+          <a href="#docs">Документы</a>
+          <a href="#gallery">Галерея</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Контакты</a>
         </div>
       </div>
     </div>
@@ -823,14 +897,14 @@
           <div class="hero-left reveal">
             <div class="kicker">
               <span class="dot" aria-hidden="true"></span>
-              <span class="chip">Уважительно • Спокойно • По шагам</span>
+              <span class="chip">Спокойно • Уважительно • По шагам</span>
               <span class="chip">Оренбург и область</span>
             </div>
 
-            <h1>Ритуальные услуги без лишних слов.<br/>С заботой и ясным порядком.</h1>
+            <h1>Организация похорон и прощаний<br/>без суеты и лишних слов.</h1>
             <p class="lead">
-              Мы берём организацию на себя: план, документы, транспорт, зал прощания, венки и сопровождение.
-              Работаем аккуратно и прозрачно — с договором и понятной сметой.
+              В сложный момент важна ясность. Мы помогаем с порядком действий, документами и организацией:
+              транспорт, зал прощания, цветы, координация. Согласуем состав услуг и смету заранее.
             </p>
 
             <div class="hero-actions">
@@ -840,9 +914,6 @@
               <a class="btn" id="btnWhatsHero" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
                 💬 <span>WhatsApp</span>
               </a>
-              <a class="btn" id="btnTgHero" href="https://t.me/USERNAME_PLACEHOLDER" target="_blank" rel="noopener" aria-label="Написать в Telegram">
-                ✈ <span>Telegram</span>
-              </a>
               <a class="btn ghost" href="#how" aria-label="Посмотреть как мы работаем">
                 <span>Как мы работаем</span>
               </a>
@@ -851,39 +922,30 @@
             <div class="meta-row" aria-label="Доверие и прозрачность">
               <span class="badge">Договор и прозрачная смета</span>
               <span class="badge">Помощь с документами</span>
-              <span class="badge">Координация церемонии</span>
+              <span class="badge">Транспорт по городу/области</span>
               <span class="badge">Связь 24/7</span>
             </div>
 
             <div class="divider"></div>
-
-            <p class="hint" style="margin-top:14px">
-              Если не знаете с чего начать — просто позвоните. Мы спокойно объясним порядок и предложим варианты без давления.
+            <p class="hint">
+              Если не знаете, с чего начать — просто позвоните. Мы зададим несколько уточняющих вопросов и спокойно объясним порядок.
             </p>
           </div>
 
           <div class="hero-right reveal" aria-label="Визуальный блок">
             <div class="hero-media" aria-hidden="true"></div>
-            <div class="hero-glGlass hero-glass">
-              <div id="threeWrap" aria-hidden="true">
-                <canvas id="threeCanvas"></canvas>
-                <div class="webgl-fallback" id="webglFallback">
-                  <div class="fallback-card">
-                    <b>Символ памяти</b>
-                    <p>На этом устройстве 3D-визуал недоступен. Мы показываем спокойный фон — всё остальное работает.</p>
-                  </div>
-                </div>
-              </div>
+            <div class="hero-glass" aria-hidden="true">
+              <div class="hero-overlay"></div>
             </div>
 
             <div class="hero-badge">
               <div class="mini">
-                <b>С чего начнём</b>
-                <p>2–3 вопроса по телефону → предложим план и ориентир по бюджету.</p>
+                <b>Понятный старт</b>
+                <p>Созвонимся → уточним детали → предложим план и 2–3 варианта по бюджету.</p>
               </div>
               <div class="mini">
-                <b>Без “сюрпризов”</b>
-                <p>Согласовываем состав услуг и стоимость до начала работ.</p>
+                <b>Без давления</b>
+                <p>Объясняем по делу, без навязывания. Решение — за вами.</p>
               </div>
             </div>
           </div>
@@ -897,7 +959,7 @@
         <div class="section-head reveal">
           <div>
             <h2>Услуги</h2>
-            <p>Всё, что обычно требуется, — в одном месте. Можно выбрать отдельные услуги или доверить организацию “под ключ”.</p>
+            <p>Можно выбрать отдельную услугу или поручить организацию “под ключ”. Мы адаптируем план под вашу ситуацию и сроки.</p>
           </div>
           <a class="btn" href="#contact" aria-label="Уточнить стоимость и доступность">Уточнить стоимость →</a>
         </div>
@@ -908,28 +970,28 @@
             <div class="content">
               <h3>Организация под ключ</h3>
               <p>
-                Составляем план, согласуем порядок действий и берём координацию на себя.
-                Уважительный тон, аккуратная коммуникация, прозрачные договорённости.
+                Составляем порядок действий, берём координацию, помогаем с документами и логистикой.
+                Вы всегда понимаете, что и почему делается — шаг за шагом.
               </p>
               <div class="strip" aria-label="Ключевые элементы">
                 <span class="chip">План и тайминг</span>
                 <span class="chip">Документы</span>
                 <span class="chip">Транспорт</span>
                 <span class="chip">Зал прощания</span>
-                <span class="chip">Цветы/венки</span>
+                <span class="chip">Цветы</span>
               </div>
             </div>
           </div>
 
           <div class="services-grid reveal" aria-label="Список услуг">
-            <div class="svc"><b>Кремация</b><p>Организация и сопровождение, согласование времени, помощь с оформлением.</p></div>
-            <div class="svc"><b>Транспорт</b><p>Подача транспорта по городу и области, маршрут и ожидание по плану.</p></div>
+            <div class="svc"><b>Похороны под ключ</b><p>Организация и сопровождение церемонии, согласование времени и порядка.</p></div>
+            <div class="svc"><b>Кремация</b><p>Организация, согласование, подготовка документов и сопровождение процесса.</p></div>
+            <div class="svc"><b>Транспорт</b><p>Подача транспорта, маршрут, ожидание по плану. По городу и области.</p></div>
             <div class="svc"><b>Зал прощания</b><p>Подбор доступных вариантов, согласование времени, подготовка пространства.</p></div>
-            <div class="svc"><b>Оформление документов</b><p>Чек-лист, консультация, сопровождение по шагам — без лишней бюрократии.</p></div>
-            <div class="svc"><b>Венки и цветы</b><p>Спокойные композиции, ленты, доставка к месту прощания (по согласованию).</p></div>
-            <div class="svc"><b>Памятники / таблички</b><p>Консультация по вариантам и срокам, помощь с подбором без навязывания.</p></div>
-            <div class="svc"><b>Сопровождение</b><p>Координация на месте, порядок церемонии, деликатная помощь близким.</p></div>
-            <div class="svc"><b>“Груз 200”</b><p>Аккуратно и корректно: консультация по порядку действий и сопровождение.</p></div>
+            <div class="svc"><b>Оформление документов</b><p>Чек-лист, консультация, помощь по шагам — без лишней нагрузки на близких.</p></div>
+            <div class="svc"><b>Цветы и венки</b><p>Композиции и ленты, доставка к месту прощания по согласованию.</p></div>
+            <div class="svc"><b>Памятники / таблички</b><p>Консультация по вариантам и срокам, подбор без навязывания.</p></div>
+            <div class="svc"><b>Сопровождение</b><p>Координация на месте, внимание к деталям, деликатная помощь семье.</p></div>
           </div>
         </div>
       </div>
@@ -941,48 +1003,47 @@
         <div class="section-head reveal">
           <div>
             <h2>Пакеты и состав услуг</h2>
-            <p>Три ориентировочных варианта и возможность собрать комплект под ваш бюджет. Стоимость зависит от комплектации и выбранных опций.</p>
+            <p>Ниже — ориентиры по составу. Итог зависит от выбранных опций и логистики. Перед началом работ согласуем смету и перечень услуг.</p>
           </div>
-          <span class="chip">Дисклеймер: цены — ориентиры</span>
+          <span class="chip">Можно собрать под бюджет</span>
         </div>
 
         <div class="pricing">
           <div class="price-table reveal" aria-label="Сравнение пакетов">
             <header>
               <h3>Сравнение пакетов</h3>
-              <p>Выберите базовый ориентир — мы уточним детали и предложим спокойный план.</p>
+              <p>Выберите ориентир — мы уточним детали и предложим аккуратный план.</p>
             </header>
             <table>
               <thead>
                 <tr>
                   <th>Что входит</th>
-                  <th>Старт</th>
+                  <th>Базовый</th>
                   <th>Стандарт</th>
-                  <th>Премиум</th>
+                  <th>Расширенный</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td>Консультация и план действий</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                <tr><td>Помощь с документами (чек-лист + сопровождение)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                <tr><td>Транспорт (базовая подача)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                <tr><td>Зал прощания / организация времени</td><td>—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                <tr><td>Оформление зала (аккуратно, без излишеств)</td><td>—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                <tr><td>Цветы/венки (по согласованию)</td><td>Опция</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                <tr><td>Консультация + план действий</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                <tr><td>Помощь с документами (чек-лист/сопровождение)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                <tr><td>Транспорт (подача/маршрут по плану)</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                <tr><td>Зал прощания / организация времени</td><td>Опция</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                <tr><td>Оформление пространства (аккуратно)</td><td>—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                <tr><td>Цветы/венки</td><td>Опция</td><td class="tick">✓</td><td class="tick">✓</td></tr>
                 <tr><td>Координация церемонии на месте</td><td>Опция</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                <tr><td>Расширенная логистика по области</td><td>—</td><td>Опция</td><td class="tick">✓</td></tr>
+                <tr><td>Логистика по области</td><td>—</td><td>Опция</td><td class="tick">✓</td></tr>
               </tbody>
             </table>
             <div class="subnote">
-              <b style="color:rgba(255,255,255,.86)">Важно:</b>
-              ориентиры по стоимости зависят от набора услуг, места и времени, выбранных предметов и логистики.
-              Мы заранее согласуем состав и смету — без неожиданных доплат.
+              <b style="color:rgba(255,255,255,.88)">Важно:</b>
+              стоимость зависит от комплектации и выбранных опций. Мы заранее согласуем состав услуг и смету — без неожиданных доплат.
             </div>
           </div>
 
           <div class="cards reveal" aria-label="Пояснения и CTA">
             <div class="card">
-              <h3>Соберём под ваш бюджет</h3>
-              <p>Опишите ситуацию — предложим несколько вариантов комплектации. Можно начать с минимального и добавить нужное.</p>
+              <h3>Подберём аккуратный вариант</h3>
+              <p>Если нужно — начнём с минимального набора, а дальше добавим только то, что действительно важно для вашей ситуации.</p>
               <div class="budget">
                 <a class="btn primary" href="#contact" aria-label="Оставить заявку">Оставить заявку →</a>
                 <a class="btn" id="btnWhatsBudget" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">WhatsApp</a>
@@ -990,16 +1051,16 @@
             </div>
 
             <div class="card">
-              <h3>Доверие и прозрачность</h3>
-              <p>Работаем по договору. Предоставляем понятный список услуг и смету до начала работ. Деликатное сопровождение.</p>
+              <h3>Спокойная коммуникация</h3>
+              <p>Коротко объясняем порядок действий, фиксируем договорённости. Вы понимаете следующий шаг и сроки.</p>
             </div>
 
             <div class="card">
-              <h3>Если вы в дороге или нет времени говорить</h3>
-              <p>Можно написать в WhatsApp/Telegram — мы отправим краткий план и чек-лист документов.</p>
+              <h3>Если неудобно говорить</h3>
+              <p>Можно написать: мы отправим план, список документов и уточняющие вопросы в одном сообщении.</p>
               <div class="budget">
-                <a class="btn" id="btnTgBudget" href="https://t.me/USERNAME_PLACEHOLDER" target="_blank" rel="noopener" aria-label="Написать в Telegram">Telegram</a>
-                <a class="btn ghost" href="#docs" aria-label="Перейти к документам">Документы →</a>
+                <a class="btn ghost" id="btnTgBudget" href="https://t.me/USERNAME_PLACEHOLDER" target="_blank" rel="noopener" aria-label="Написать в Telegram">Telegram</a>
+                <a class="btn" href="#docs" aria-label="Перейти к документам">Документы →</a>
               </div>
             </div>
           </div>
@@ -1013,20 +1074,20 @@
         <div class="section-head reveal">
           <div>
             <h2>Как мы работаем</h2>
-            <p>Пять спокойных шагов. Мы подскажем, что делать, и возьмём организацию на себя в рамках согласованного плана.</p>
+            <p>Пять шагов, чтобы вы не оставались один на один с организационными вопросами.</p>
           </div>
-          <span class="chip">Порядок → ясность</span>
+          <span class="chip">Ясно и по делу</span>
         </div>
 
         <div class="how">
           <div class="how-photo reveal" aria-label="Фото: как мы работаем"></div>
 
           <div class="steps reveal" aria-label="Пять шагов">
-            <div class="step"><div class="num">1</div><div><b>Звонок или сообщение</b><p>Коротко уточняем ситуацию и сроки. Если сложно говорить — пишите в WhatsApp/Telegram.</p></div></div>
-            <div class="step"><div class="num">2</div><div><b>План и варианты</b><p>Предлагаем 2–3 сценария по бюджету и формату. Согласовываем состав услуг.</p></div></div>
-            <div class="step"><div class="num">3</div><div><b>Документы</b><p>Даём чек-лист и помогаем с оформлением. Объясняем порядок шагов без бюрократичных формулировок.</p></div></div>
-            <div class="step"><div class="num">4</div><div><b>Церемония</b><p>Организуем транспорт, зал прощания, цветы и координацию по таймингу.</p></div></div>
-            <div class="step"><div class="num">5</div><div><b>Сопровождение</b><p>Остаёмся на связи: уточнения, закрывающие вопросы, дальнейшие шаги — спокойно и по делу.</p></div></div>
+            <div class="step"><div class="num">1</div><div><b>Связь 24/7</b><p>Звонок или сообщение. Уточняем ситуацию и сроки, без лишних вопросов.</p></div></div>
+            <div class="step"><div class="num">2</div><div><b>План и варианты</b><p>Предлагаем 2–3 сценария по бюджету и формату. Согласуем состав услуг.</p></div></div>
+            <div class="step"><div class="num">3</div><div><b>Документы</b><p>Даем чек-лист и помогаем с оформлением. Вы знаете, что делать следующим.</p></div></div>
+            <div class="step"><div class="num">4</div><div><b>Организация церемонии</b><p>Транспорт, зал, цветы, тайминг. Всё собираем в единый понятный порядок.</p></div></div>
+            <div class="step"><div class="num">5</div><div><b>Сопровождение</b><p>Остаёмся на связи до завершения. Помогаем закрыть вопросы спокойно и корректно.</p></div></div>
           </div>
         </div>
       </div>
@@ -1038,23 +1099,23 @@
         <div class="section-head reveal">
           <div>
             <h2>Документы и порядок</h2>
-            <p>Ниже — базовый чек-лист. В реальности набор может отличаться, мы уточним по вашей ситуации и подскажем следующий шаг.</p>
+            <p>Список может отличаться по ситуации. Мы подскажем, что именно нужно в вашем случае и в какой последовательности.</p>
           </div>
-          <a class="btn ghost" href="#contact" aria-label="Получить чек-лист в сообщении">Получить чек-лист →</a>
+          <a class="btn ghost" href="#contact" aria-label="Получить чек-лист">Получить чек-лист →</a>
         </div>
 
         <div class="docs">
           <div class="check reveal" aria-label="Чек-лист документов">
             <h3>Чек-лист</h3>
             <ul class="list">
-              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Паспорт заявителя</b><span>Кто оформляет организацию и подписывает договор.</span></div></li>
+              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Паспорт заявителя</b><span>Кто оформляет обращение и подписывает договор.</span></div></li>
               <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Документ о смерти (если уже есть)</b><span>Если нет — объясним порядок получения.</span></div></li>
-              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>СНИЛС/полис (если на руках)</b><span>Полезно для отдельных процедур и уточнений.</span></div></li>
-              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Контакты близких</b><span>Для согласований времени и организационных вопросов.</span></div></li>
-              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Пожелания по формату</b><span>Кремация/похороны, зал прощания, транспорт, цветы.</span></div></li>
-              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Адрес и логистика</b><span>Город/область, где требуется организация и сопровождение.</span></div></li>
+              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>СНИЛС/полис (если на руках)</b><span>Иногда требуется для уточнений и процедур.</span></div></li>
+              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Контакты близких</b><span>Для согласования времени и организационных деталей.</span></div></li>
+              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Пожелания по формату</b><span>Кремация/похороны, зал, транспорт, цветы.</span></div></li>
+              <li class="li"><span class="icon" aria-hidden="true"></span><div><b>Город/район</b><span>Чтобы сразу оценить логистику по Оренбургу и области.</span></div></li>
             </ul>
-            <p class="hint">Не переживайте, если чего-то нет под рукой. Начать можно с звонка — мы подскажем следующий шаг.</p>
+            <p class="hint">Если чего-то нет — не проблема. Начать можно с звонка: мы скажем, какой следующий шаг самый важный.</p>
           </div>
 
           <div class="doc-photo reveal" aria-label="Фото: документы и порядок"></div>
@@ -1067,48 +1128,48 @@
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Фотографии</h2>
-            <p>Спокойные детали: цветы, свечи, зал, транспорт, фактуры. Без резких или неприятных изображений.</p>
+            <h2>Галерея</h2>
+            <p>Спокойные детали: цветы, зал, фактуры, транспорт. Нажмите на фото для увеличения.</p>
           </div>
-          <span class="chip">Нажмите на фото для увеличения</span>
+          <span class="chip">Без резких изображений</span>
         </div>
 
         <div class="gallery">
           <div class="masonry reveal" aria-label="Галерея изображений">
-            <div class="ph span-4 tall" data-title="Зал прощания • спокойный свет">
-              <img loading="lazy" alt="Зал прощания, мягкий свет" data-unsplash="funeral,chapel,soft-light,interior" />
+            <div class="ph span-4 tall" data-title="Цветы • спокойный свет">
+              <img loading="lazy" alt="Цветы, спокойный свет" data-unsplash="flowers,white,arrangement,detail" />
             </div>
-            <div class="ph span-2" data-title="Цветы • аккуратные композиции">
-              <img loading="lazy" alt="Цветы, композиция" data-unsplash="flowers,white,arrangement,detail" />
+            <div class="ph span-2" data-title="Свеча • фактура">
+              <img loading="lazy" alt="Свеча, фактура" data-unsplash="candle,soft,texture" />
             </div>
-            <div class="ph span-2" data-title="Свеча • тёплая фактура">
-              <img loading="lazy" alt="Свеча, спокойный фон" data-unsplash="candle,soft,texture" />
+            <div class="ph span-2" data-title="Зал • аккуратный интерьер">
+              <img loading="lazy" alt="Интерьер зала" data-unsplash="interior,soft-light,minimal" />
             </div>
-            <div class="ph span-3" data-title="Руки поддержки • деликатность">
+            <div class="ph span-3" data-title="Поддержка • уважительный тон">
               <img loading="lazy" alt="Руки поддержки" data-unsplash="hands,support,care,soft" />
             </div>
             <div class="ph span-3" data-title="Фактура • минимализм">
-              <img loading="lazy" alt="Ткань, минимализм" data-unsplash="fabric,black,texture,minimal" />
+              <img loading="lazy" alt="Темная фактура" data-unsplash="fabric,black,texture,minimal" />
             </div>
             <div class="ph span-2" data-title="Документы • порядок">
               <img loading="lazy" alt="Документы" data-unsplash="paper,document,desk,minimal" />
             </div>
-            <div class="ph span-4" data-title="Транспорт • организованная логистика">
-              <img loading="lazy" alt="Транспорт, спокойная логистика" data-unsplash="car,service,transport,night,soft" />
+            <div class="ph span-4" data-title="Транспорт • логистика">
+              <img loading="lazy" alt="Транспорт" data-unsplash="car,service,transport,soft" />
             </div>
           </div>
 
           <aside class="gallery-side reveal" aria-label="Пояснения к галерее">
-            <h3>Почему такие фото</h3>
-            <p>Мы не используем резкие образы. Визуальный тон — спокойный и уважительный: свет, фактура, детали церемонии.</p>
+            <h3>Визуальный тон</h3>
+            <p>Мы сознательно выбираем спокойные изображения — без резких деталей. Так сайт остаётся уважительным и аккуратным.</p>
             <div class="pill">
-              <span class="chip">Без шок-контента</span>
-              <span class="chip">Минимализм</span>
               <span class="chip">Контраст</span>
-              <span class="chip">Аккуратный свет</span>
+              <span class="chip">Минимализм</span>
+              <span class="chip">Мягкий свет</span>
+              <span class="chip">Читабельно</span>
             </div>
             <div class="divider"></div>
-            <p class="hint">Хотите заменить галерею на ваши фото — скажи, я подскажу точные строки.</p>
+            <p class="hint">Если хочешь — заменим всю галерею на твои фото (локально в assets/img).</p>
           </aside>
         </div>
       </div>
@@ -1120,18 +1181,18 @@
         <div class="section-head reveal">
           <div>
             <h2>Отзывы</h2>
-            <p>Коротко и по делу — без драматизации. Мы ценим спокойный процесс и уважительное общение.</p>
+            <p>Коротко и по делу — без драматизации. Нам важно, чтобы процесс был спокойным и понятным.</p>
           </div>
           <a class="btn" href="#contact" aria-label="Задать вопрос">Задать вопрос →</a>
         </div>
 
         <div class="reviews reveal" aria-label="Отзывы клиентов">
-          <div class="quote"><p>«Объяснили порядок действий и помогли с документами. Всё было организовано аккуратно, без лишнего давления.»</p><b>Елена</b><small>Оренбург</small></div>
-          <div class="quote"><p>«Понравилось, что смету согласовали заранее. На месте всё прошло спокойно, команда вежливая.»</p><b>Сергей</b><small>Оренбургская область</small></div>
-          <div class="quote"><p>«Были на связи 24/7, отвечали коротко и понятно. Помогли с залом и транспортом.»</p><b>Анастасия</b><small>Оренбург</small></div>
-          <div class="quote"><p>«Ничего лишнего: план, тайминг, координация. Важные моменты проговорили заранее.»</p><b>Игорь</b><small>Оренбург</small></div>
-          <div class="quote"><p>«Подобрали вариант по бюджету и объяснили, что обязательно, а что опционально. Спасибо за деликатность.»</p><b>Марина</b><small>Оренбургская область</small></div>
-          <div class="quote"><p>«Очень спокойная коммуникация. В момент, когда тяжело думать, это действительно важно.»</p><b>Ольга</b><small>Оренбург</small></div>
+          <div class="quote"><p>«Спокойно объяснили порядок действий и помогли с документами. Всё прошло аккуратно и без лишней суеты.»</p><b>Елена</b><small>Оренбург</small></div>
+          <div class="quote"><p>«Смету согласовали заранее — это важно. На месте всё было организовано корректно.»</p><b>Сергей</b><small>Оренбургская область</small></div>
+          <div class="quote"><p>«Были на связи, отвечали коротко и понятно. Помогли с залом и транспортом.»</p><b>Анастасия</b><small>Оренбург</small></div>
+          <div class="quote"><p>«Ничего лишнего: план, тайминг, координация. Самое главное — уважительное общение.»</p><b>Игорь</b><small>Оренбург</small></div>
+          <div class="quote"><p>«Подобрали вариант по бюджету и объяснили, что обязательно, а что можно не делать сразу.»</p><b>Марина</b><small>Оренбургская область</small></div>
+          <div class="quote"><p>«В трудный момент важно, чтобы рядом были люди, которые всё организуют спокойно. Спасибо.»</p><b>Ольга</b><small>Оренбург</small></div>
         </div>
       </div>
     </section>
@@ -1142,43 +1203,43 @@
         <div class="section-head reveal">
           <div>
             <h2>Частые вопросы</h2>
-            <p>Если вопрос не нашли — напишите, мы ответим коротко и по шагам.</p>
+            <p>Если не нашли ответ — напишите, мы подскажем порядок действий и варианты.</p>
           </div>
-          <span class="chip">8+ вопросов</span>
+          <span class="chip">8 вопросов</span>
         </div>
 
         <div class="faq reveal" aria-label="FAQ">
           <div class="qa">
-            <button class="q" type="button" aria-expanded="false"><span>С чего начать, если не понимаю порядок действий?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Начать можно с звонка или сообщения. Мы зададим 2–3 вопроса и предложим понятный план: что делаем сейчас, что — позже.</div></div>
+            <button class="q" type="button" aria-expanded="false"><span>С чего начать, если я не знаю порядок действий?</span><span class="chev" aria-hidden="true">▾</span></button>
+            <div class="a" role="region"><div>Начните со звонка или сообщения. Мы уточним несколько деталей и предложим понятный план: что сделать сейчас, что можно позже.</div></div>
           </div>
           <div class="qa">
             <button class="q" type="button" aria-expanded="false"><span>Работаете ли вы по Оренбургской области?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Да, работаем по Оренбургу и области. Уточним населённый пункт и логистику — предложим варианты транспорта и тайминга.</div></div>
+            <div class="a" role="region"><div>Да. Уточним населённый пункт и логистику — предложим варианты транспорта и времени.</div></div>
           </div>
           <div class="qa">
-            <button class="q" type="button" aria-expanded="false"><span>Можно ли оформить всё дистанционно, если я в другом городе?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Часть вопросов можно согласовать дистанционно: план, список услуг, смета, коммуникация. Детали зависят от ситуации — подскажем.</div></div>
+            <button class="q" type="button" aria-expanded="false"><span>Можно ли оформить часть вопросов дистанционно?</span><span class="chev" aria-hidden="true">▾</span></button>
+            <div class="a" role="region"><div>Да. План, список услуг и предварительные согласования можно сделать по телефону/мессенджеру. Далее подскажем по ситуации.</div></div>
           </div>
           <div class="qa">
-            <button class="q" type="button" aria-expanded="false"><span>Есть ли фиксированные цены?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Есть ориентиры по пакетам, но итог зависит от комплектации и опций. Мы заранее согласуем состав услуг и смету до начала работ.</div></div>
+            <button class="q" type="button" aria-expanded="false"><span>Есть ли фиксированная стоимость?</span><span class="chev" aria-hidden="true">▾</span></button>
+            <div class="a" role="region"><div>Есть ориентиры по пакетам, но итог зависит от комплектации и логистики. Мы заранее фиксируем состав услуг и смету.</div></div>
           </div>
           <div class="qa">
-            <button class="q" type="button" aria-expanded="false"><span>Помогаете ли с документами?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Да. Дадим чек-лист и поясним порядок действий. Если нужно — сопроводим по шагам, чтобы не тратить лишние силы.</div></div>
+            <button class="q" type="button" aria-expanded="false"><span>Помогаете ли вы с документами?</span><span class="chev" aria-hidden="true">▾</span></button>
+            <div class="a" role="region"><div>Да. Дадим чек-лист и поясним порядок. При необходимости — сопровождение по шагам.</div></div>
           </div>
           <div class="qa">
-            <button class="q" type="button" aria-expanded="false"><span>Можно ли заказать только транспорт или зал прощания?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Да, можно выбрать отдельные услуги. Мы аккуратно уточним детали и предложим варианты без навязывания.</div></div>
+            <button class="q" type="button" aria-expanded="false"><span>Можно заказать только транспорт или зал прощания?</span><span class="chev" aria-hidden="true">▾</span></button>
+            <div class="a" role="region"><div>Да. Можно выбрать отдельные услуги. Мы уточним детали и предложим варианты.</div></div>
           </div>
           <div class="qa">
             <button class="q" type="button" aria-expanded="false"><span>Как быстро вы можете подключиться?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Мы на связи 24/7. Сразу уточним сроки и предложим ближайшие возможные окна по организации и логистике.</div></div>
+            <div class="a" role="region"><div>Мы на связи 24/7. Сразу уточним сроки и предложим ближайшие варианты по организации.</div></div>
           </div>
           <div class="qa">
-            <button class="q" type="button" aria-expanded="false"><span>Вы предоставляете договор и смету?</span><span class="chev" aria-hidden="true">▾</span></button>
-            <div class="a" role="region"><div>Да. Состав услуг и смета согласуются заранее. Это помогает избежать недопониманий и “сюрпризов”.</div></div>
+            <button class="q" type="button" aria-expanded="false"><span>Вы работаете по договору?</span><span class="chev" aria-hidden="true">▾</span></button>
+            <div class="a" role="region"><div>Да. Договор и прозрачная смета согласуются до начала работ — это помогает избежать недопониманий.</div></div>
           </div>
         </div>
       </div>
@@ -1190,20 +1251,20 @@
         <div class="section-head reveal">
           <div>
             <h2>Контакты</h2>
-            <p>Оренбург и область. Адрес не публикуем — сообщим по телефону. Можно позвонить или написать.</p>
+            <p>Оренбург и область. Адрес: сообщим по телефону. Можно позвонить или написать — ответим быстро и спокойно.</p>
           </div>
           <span class="chip" id="workHoursChip">Круглосуточно</span>
         </div>
 
         <div class="contact">
-          <div class="map reveal" aria-label="Блок карты (заглушка)">
-            <div class="overlay" aria-hidden="true"></div>
-            <div class="label">
-              <b>ОренСпецСервис — на связи 24/7</b>
-              <p><span id="addrText">Адрес: уточняйте по телефону</span><br/>
-                <span id="areaText">География: Оренбург / Оренбургская область</span>
-              </p>
+          <div class="mapWrap reveal" aria-label="Карта и маршрут">
+            <div class="mapTop">
+              <b>Карта</b>
+              <div class="row">
+                <a class="btn ghost" id="btnRouteTop" href="#" target="_blank" rel="noopener" aria-label="Построить маршрут">🧭 Маршрут</a>
+              </div>
             </div>
+            <iframe class="mapFrame" id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Карта"></iframe>
           </div>
 
           <div class="cols">
@@ -1211,19 +1272,21 @@
               <h3>Связаться сейчас</h3>
               <p>
                 Телефон: <b id="phoneText">+7 (000) 000-00-00</b><br/>
-                Можно написать: WhatsApp / Telegram
+                <span id="addrText">Адрес: уточняйте по телефону</span><br/>
+                <span id="areaText">География: Оренбург / Оренбургская область</span>
               </p>
               <div class="row">
                 <a class="btn primary" id="btnCallContact" href="tel:+70000000000" aria-label="Позвонить">☎ Позвонить</a>
                 <a class="btn" id="btnWhatsContact" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="WhatsApp">💬 WhatsApp</a>
                 <a class="btn ghost" id="btnTgContact" href="https://t.me/USERNAME_PLACEHOLDER" target="_blank" rel="noopener" aria-label="Telegram">✈ Telegram</a>
+                <a class="btn ghost" id="btnRoute" href="#" target="_blank" rel="noopener" aria-label="Построить маршрут">🧭 Маршрут</a>
               </div>
-              <p class="hint">Замените контакты на свои — вверху файла, в объекте <code>BRAND</code>.</p>
+              <p class="hint">Контакты меняются в объекте <code>BRAND</code> внизу файла.</p>
             </div>
 
             <div class="panel reveal" aria-label="Форма заявки">
               <h3>Заявка (без сервера)</h3>
-              <p>Два варианта отправки: <b>mailto</b> или генерация текста для <b>WhatsApp</b>.</p>
+              <p>Выберите удобный способ: Mailto или сообщение в WhatsApp с готовым текстом.</p>
 
               <form id="leadForm">
                 <div class="field">
@@ -1236,7 +1299,7 @@
                 </div>
                 <div class="field">
                   <label for="msg">Комментарий</label>
-                  <textarea id="msg" name="msg" placeholder="Коротко: город/район, что нужно (если знаете)"></textarea>
+                  <textarea id="msg" name="msg" placeholder="Коротко: район/город, что нужно (если знаете)"></textarea>
                 </div>
 
                 <div class="form-actions">
@@ -1267,23 +1330,23 @@
             </div>
 
             <div class="fine">
-              <b style="color:rgba(255,255,255,.80)">Политика конфиденциальности (кратко):</b><br/>
-              Мы используем данные из формы только для связи по вашему запросу. Данные не передаются третьим лицам. Подробная версия — по запросу.
+              <b style="color:rgba(255,255,255,.82)">Политика конфиденциальности (кратко):</b><br/>
+              Мы используем данные из формы только для связи по вашему запросу. Данные не передаются третьим лицам.
               <br/><br/>
-              <b style="color:rgba(255,255,255,.80)">Реквизиты:</b> ИНН/ОГРН — заглушки, добавьте свои.
+              <b style="color:rgba(255,255,255,.82)">Реквизиты:</b> добавьте ИНН/ОГРН и юр. данные компании (сейчас заглушка).
               <br/><br/>
-              <span style="opacity:.9">© <span id="year"></span> ОренСпецСервис.</span>
+              <span style="opacity:.92">© <span id="year"></span> ОренСпецСервис.</span>
             </div>
           </div>
 
           <div class="req" aria-label="Блок доверия">
-            <b>Доверие</b>
+            <b>Почему нам доверяют</b>
             <ul>
-              <li>Договор и прозрачная смета до начала работ</li>
-              <li>Понятный план и спокойная коммуникация</li>
-              <li>Помощь с документами по чек-листу</li>
-              <li>Координация церемонии и логистики</li>
-              <li>На связи 24/7 (уточните контакты в настройках)</li>
+              <li>Договорённости фиксируем заранее: состав услуг и смета</li>
+              <li>Понятный план и аккуратная координация</li>
+              <li>Документы — по чек-листу, без лишней бюрократии</li>
+              <li>Уважительный тон общения, без давления</li>
+              <li>Связь 24/7</li>
             </ul>
             <div class="row" style="margin-top:12px">
               <a class="btn primary" href="#contact" aria-label="Открыть контакты">Контакты →</a>
@@ -1304,55 +1367,80 @@
         <img class="lb-img" id="lbImg" alt="Просмотр фото" />
       </div>
     </div>
-  </main>
 
-  <!-- Three.js (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <!-- Mobile bar -->
+    <div class="mobileBar" aria-label="Быстрые действия">
+      <div class="grid">
+        <a class="btn primary" id="mbCall" href="#" aria-label="Позвонить">☎ Позвонить</a>
+        <a class="btn" id="mbWA" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">💬 WhatsApp</a>
+        <a class="btn ghost" id="mbRoute" href="#" target="_blank" rel="noopener" aria-label="Маршрут">🧭 Маршрут</a>
+      </div>
+    </div>
+  </main>
 
   <script>
     // =========================
-    // BRAND SETTINGS (Меняйте тут)
+    // BRAND SETTINGS (меняй тут)
     // =========================
     const BRAND = {
       name: "ОренСпецСервис",
-      cityLine: "Оренбург • Ритуальные услуги • 24/7",
+      topLine: "Оренбург • Ритуальные услуги • 24/7",
       area: "Оренбург / Оренбургская область",
-      address: "Адрес: уточняйте по телефону",
+      addressText: "Адрес: уточняйте по телефону",
       phoneDisplay: "+7 (000) 000-00-00",
       phoneTel: "+70000000000",
       whatsappNumber: "70000000000",
       telegramUsername: "USERNAME_PLACEHOLDER",
       emailTo: "hello@example.com",
-      pagesUrl: "https://example.github.io/orenspecservice/",
-      hoursText: "Круглосуточно"
+      pagesUrl: "https://rusalylch.github.io/orenspecserviss/",
+      hoursText: "Круглосуточно",
+
+      // Куда строится маршрут + что показывает карта:
+      // Пример: "Оренбург, ул. Примерная 1" или "Оренбург, ОренСпецСервис"
+      mapDestination: "Оренбург"
     };
 
-    // =========================
     // Helpers
-    // =========================
     const $ = (s, el=document) => el.querySelector(s);
     const $$ = (s, el=document) => Array.from(el.querySelectorAll(s));
     const enc = encodeURIComponent;
 
     function setBrandBindings(){
+      $("#topLine").textContent = BRAND.topLine;
+
       $("#btnCallTop").href = `tel:${BRAND.phoneTel}`;
       $("#btnCallHero").href = `tel:${BRAND.phoneTel}`;
       $("#btnCallContact").href = `tel:${BRAND.phoneTel}`;
+
       $("#btnWhatsHero").href = `https://wa.me/${BRAND.whatsappNumber}`;
       $("#btnWhatsContact").href = `https://wa.me/${BRAND.whatsappNumber}`;
       $("#btnWhatsBudget").href = `https://wa.me/${BRAND.whatsappNumber}`;
-      $("#btnTgHero").href = `https://t.me/${BRAND.telegramUsername}`;
-      $("#btnTgContact").href = `https://t.me/${BRAND.telegramUsername}`;
+
       $("#btnTgBudget").href = `https://t.me/${BRAND.telegramUsername}`;
+      $("#btnTgContact").href = `https://t.me/${BRAND.telegramUsername}`;
 
       $("#phoneText").textContent = BRAND.phoneDisplay;
       $("#workHoursChip").textContent = BRAND.hoursText;
-      $("#addrText").textContent = BRAND.address;
+      $("#addrText").textContent = BRAND.addressText;
       $("#areaText").textContent = `География: ${BRAND.area}`;
-      $("#footerCity").textContent = `${BRAND.cityLine}`;
+      $("#footerCity").textContent = BRAND.topLine;
       $("#year").textContent = new Date().getFullYear();
 
-      // Update JSON-LD with your values
+      // Map iframe + route
+      const mapQ = BRAND.mapDestination;
+      const mapUrl = `https://www.google.com/maps?q=${enc(mapQ)}&output=embed`;
+      $("#mapFrame").src = mapUrl;
+
+      const routeUrl = `https://www.google.com/maps/dir/?api=1&destination=${enc(mapQ)}&travelmode=driving`;
+      $("#btnRoute").href = routeUrl;
+      $("#btnRouteTop").href = routeUrl;
+
+      // Mobile bar
+      $("#mbCall").href = `tel:${BRAND.phoneTel}`;
+      $("#mbWA").href = `https://wa.me/${BRAND.whatsappNumber}`;
+      $("#mbRoute").href = routeUrl;
+
+      // JSON-LD update
       try{
         const ldEl = $("#ldJson");
         const data = JSON.parse(ldEl.textContent);
@@ -1360,7 +1448,7 @@
         data.telephone = BRAND.phoneDisplay;
         data.url = BRAND.pagesUrl;
         data.areaServed = BRAND.area;
-        data.address.streetAddress = BRAND.address;
+        data.address.streetAddress = BRAND.addressText;
         data.sameAs = [
           `https://t.me/${BRAND.telegramUsername}`,
           `https://wa.me/${BRAND.whatsappNumber}`
@@ -1369,7 +1457,7 @@
       }catch(e){}
     }
 
-    // Gallery images from Unsplash (no API keys)
+    // Unsplash gallery images (no API keys)
     function setUnsplashImages(){
       $$("#gallery img[data-unsplash]").forEach(img=>{
         const q = img.getAttribute("data-unsplash");
@@ -1377,7 +1465,7 @@
       });
     }
 
-    // Reveal
+    // Reveal on scroll
     function initReveal(){
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if(reduce){
@@ -1470,207 +1558,90 @@
       refreshLinks();
     }
 
-    // WebGL check
-    function webglAvailable(){
-      try{
-        const c = document.createElement("canvas");
-        return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl")));
-      }catch(e){ return false; }
+    // Mobile menu
+    function initMobileMenu(){
+      const burger = $("#burger");
+      const menu = $("#mobileMenu");
+      if(!burger || !menu) return;
+
+      burger.addEventListener("click", ()=>{
+        menu.classList.toggle("open");
+      });
+
+      // close on click
+      $$("#mobileMenu a").forEach(a=>{
+        a.addEventListener("click", ()=> menu.classList.remove("open"));
+      });
     }
 
-    // ✅ Three.js: animated candle (replaces spiral)
-    function initThree(){
+    // Floating background canvas (subtle)
+    function initBgCanvas(){
       const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const canvas = $("#threeCanvas");
-      const fallback = $("#webglFallback");
+      const canvas = $("#bgCanvas");
+      if(!canvas || reduce) return;
 
-      if(!webglAvailable() || typeof THREE === "undefined"){
-        fallback.style.display = "flex";
-        canvas.style.display = "none";
-        return;
-      }
+      const ctx = canvas.getContext("2d", { alpha: true });
+      if(!ctx) return;
 
-      const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, powerPreference:"high-performance"});
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-      camera.position.set(0.05, 0.38, 3.2);
-
-      // soft lights
-      const key = new THREE.DirectionalLight(0xffffff, 0.95);
-      key.position.set(2.2, 2.1, 2.0);
-      scene.add(key);
-
-      const fill = new THREE.DirectionalLight(0xffffff, 0.50);
-      fill.position.set(-2.0, 0.7, 1.4);
-      scene.add(fill);
-
-      scene.add(new THREE.AmbientLight(0xffffff, 0.28));
-
-      // group
-      const group = new THREE.Group();
-      scene.add(group);
-
-      // candle body
-      const candleGeo = new THREE.CylinderGeometry(0.30, 0.32, 1.40, 48, 1, false);
-      const candleMat = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        metalness: 0.03,
-        roughness: 0.38,
-        clearcoat: 0.35,
-        clearcoatRoughness: 0.35
-      });
-      const candle = new THREE.Mesh(candleGeo, candleMat);
-      candle.position.set(-0.10, -0.18, 0);
-      group.add(candle);
-
-      // top melt
-      const topGeo = new THREE.CylinderGeometry(0.28, 0.29, 0.11, 48);
-      const topMat = new THREE.MeshPhysicalMaterial({
-        color: 0xf4f4f6,
-        metalness: 0.0,
-        roughness: 0.50
-      });
-      const top = new THREE.Mesh(topGeo, topMat);
-      top.position.set(-0.10, 0.53, 0);
-      group.add(top);
-
-      // wick
-      const wickGeo = new THREE.CylinderGeometry(0.012, 0.012, 0.12, 12);
-      const wickMat = new THREE.MeshStandardMaterial({ color: 0x0b0b0d, roughness: 0.9, metalness: 0.0 });
-      const wick = new THREE.Mesh(wickGeo, wickMat);
-      wick.position.set(-0.10, 0.62, 0.02);
-      wick.rotation.x = 0.22;
-      group.add(wick);
-
-      // flame
-      const flamePts = [
-        new THREE.Vector2(0.00, 0.00),
-        new THREE.Vector2(0.085, 0.07),
-        new THREE.Vector2(0.11, 0.18),
-        new THREE.Vector2(0.08, 0.33),
-        new THREE.Vector2(0.04, 0.48),
-        new THREE.Vector2(0.00, 0.58)
-      ];
-      const flameGeo = new THREE.LatheGeometry(flamePts, 32);
-      const flameMat = new THREE.MeshPhysicalMaterial({
-        color: 0xff2a3c,
-        roughness: 0.10,
-        metalness: 0.0,
-        transmission: 0.40,
-        thickness: 0.9,
-        transparent: true,
-        opacity: 0.78,
-        clearcoat: 0.45,
-        clearcoatRoughness: 0.18
-      });
-      const flame = new THREE.Mesh(flameGeo, flameMat);
-      flame.position.set(-0.10, 0.72, 0.02);
-      group.add(flame);
-
-      // flame core
-      const coreGeo = new THREE.LatheGeometry([
-        new THREE.Vector2(0.00, 0.00),
-        new THREE.Vector2(0.045, 0.05),
-        new THREE.Vector2(0.060, 0.14),
-        new THREE.Vector2(0.040, 0.28),
-        new THREE.Vector2(0.015, 0.40),
-        new THREE.Vector2(0.00, 0.48)
-      ], 28);
-      const coreMat = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        roughness: 0.08,
-        metalness: 0.0,
-        transmission: 0.55,
-        thickness: 1.0,
-        transparent: true,
-        opacity: 0.38
-      });
-      const core = new THREE.Mesh(coreGeo, coreMat);
-      core.position.set(-0.10, 0.73, 0.04);
-      group.add(core);
-
-      // flame light (smooth flicker)
-      const flameLight = new THREE.PointLight(0xff2a3c, 1.05, 7, 2);
-      flameLight.position.set(-0.10, 0.78, 0.70);
-      group.add(flameLight);
-
-      // halo behind
-      const haloGeo = new THREE.TorusGeometry(0.88, 0.035, 16, 140);
-      const haloMat = new THREE.MeshBasicMaterial({ color: 0xff2a3c, transparent:true, opacity: 0.14 });
-      const halo = new THREE.Mesh(haloGeo, haloMat);
-      halo.position.set(0.25, 0.25, -0.62);
-      halo.rotation.x = 0.38;
-      halo.rotation.y = -0.22;
-      scene.add(halo);
-
-      // glow plane
-      const glowGeo = new THREE.PlaneGeometry(4.4, 3.4);
-      const glowMat = new THREE.MeshBasicMaterial({color: 0xff2a3c, transparent:true, opacity: 0.10});
-      const glow = new THREE.Mesh(glowGeo, glowMat);
-      glow.position.set(0.35, 0.12, -1.45);
-      scene.add(glow);
-
-      // interaction
-      let targetX = 0, targetY = 0;
-      function onMove(x, y){
-        const rect = canvas.getBoundingClientRect();
-        const nx = (x - rect.left) / rect.width * 2 - 1;
-        const ny = (y - rect.top) / rect.height * 2 - 1;
-        targetX = nx * 0.22;
-        targetY = -ny * 0.16;
-      }
-      window.addEventListener("mousemove", (e)=> onMove(e.clientX, e.clientY), {passive:true});
-      window.addEventListener("touchmove", (e)=>{
-        if(!e.touches || !e.touches[0]) return;
-        onMove(e.touches[0].clientX, e.touches[0].clientY);
-      }, {passive:true});
+      let w=0,h=0,dpr=1;
+      let particles = [];
+      const N = 46; // intentionally low = premium/subtle
 
       function resize(){
-        const w = canvas.clientWidth;
-        const h = canvas.clientHeight;
-        const need = canvas.width !== Math.floor(w * renderer.getPixelRatio()) || canvas.height !== Math.floor(h * renderer.getPixelRatio());
-        if(need) renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = Math.floor(window.innerWidth * dpr);
+        h = Math.floor(window.innerHeight * dpr);
+        canvas.width = w;
+        canvas.height = h;
+        canvas.style.width = window.innerWidth + "px";
+        canvas.style.height = window.innerHeight + "px";
       }
-      window.addEventListener("resize", resize, {passive:true});
-      resize();
 
-      let t0 = performance.now();
-      function tick(t){
-        resize();
-        const dt = Math.min((t - t0) / 1000, 0.05);
-        t0 = t;
+      function rnd(a,b){ return a + Math.random()*(b-a); }
 
-        if(!reduce){
-          const breath = 1 + Math.sin(t * 0.0042) * 0.05;
-          const sway = Math.sin(t * 0.0032) * 0.06;
+      function init(){
+        particles = Array.from({length:N}).map(()=>({
+          x: rnd(0,w),
+          y: rnd(0,h),
+          r: rnd(90, 220) * dpr,
+          vx: rnd(-0.12, 0.12) * dpr,
+          vy: rnd(-0.08, 0.08) * dpr,
+          a: rnd(0.03, 0.09)
+        }));
+      }
 
-          flame.scale.set(1.0 + sway*0.10, breath, 1.0);
-          core.scale.set(1.0 + sway*0.08, 1.0 + Math.sin(t*0.0047)*0.06, 1.0);
+      function step(){
+        ctx.clearRect(0,0,w,h);
+        ctx.globalCompositeOperation = "lighter";
 
-          flame.rotation.z = sway * 0.10;
-          core.rotation.z = sway * 0.08;
+        for(const p of particles){
+          p.x += p.vx; p.y += p.vy;
 
-          flame.position.y = 0.72 + Math.sin(t * 0.0036) * 0.012;
-          core.position.y  = 0.73 + Math.sin(t * 0.0036) * 0.010;
+          // wrap
+          if(p.x < -p.r) p.x = w + p.r;
+          if(p.x > w + p.r) p.x = -p.r;
+          if(p.y < -p.r) p.y = h + p.r;
+          if(p.y > h + p.r) p.y = -p.r;
 
-          flameLight.intensity = 0.95 + (Math.sin(t * 0.006) * 0.10) + (Math.sin(t * 0.011) * 0.05);
-
-          glow.material.opacity = 0.09 + (Math.sin(t * 0.0013) * 0.02);
-          halo.rotation.z += dt * 0.08;
+          // gradient blob
+          const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+          g.addColorStop(0, `rgba(255,42,60,${p.a})`);
+          g.addColorStop(0.55, `rgba(193,18,31,${p.a*0.55})`);
+          g.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = g;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          ctx.fill();
         }
 
-        group.rotation.y += (targetX - group.rotation.y) * 0.06;
-        group.rotation.x += (targetY - group.rotation.x) * 0.06;
-
-        renderer.render(scene, camera);
-        requestAnimationFrame(tick);
+        ctx.globalCompositeOperation = "source-over";
+        requestAnimationFrame(step);
       }
-      requestAnimationFrame(tick);
+
+      resize();
+      init();
+      requestAnimationFrame(step);
+      window.addEventListener("resize", ()=>{ resize(); init(); }, {passive:true});
     }
 
     document.addEventListener("DOMContentLoaded", ()=>{
@@ -1680,7 +1651,8 @@
       initFAQ();
       initLightbox();
       initForm();
-      initThree();
+      initMobileMenu();
+      initBgCanvas();
     });
   </script>
 </body>
