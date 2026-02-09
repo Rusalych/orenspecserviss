@@ -912,7 +912,7 @@
                 ☎ <span>Позвонить 24/7</span>
               </a>
               <a class="btn" id="btnWhatsHero" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
-                💬 <span>WhatsApp</span>
+                💬 <span>Telegram</span>
               </a>
               <a class="btn ghost" href="#how" aria-label="Посмотреть как мы работаем">
                 <span>Как мы работаем</span>
@@ -1046,7 +1046,7 @@
               <p>Если нужно — начнём с минимального набора, а дальше добавим только то, что действительно важно для вашей ситуации.</p>
               <div class="budget">
                 <a class="btn primary" href="#contact" aria-label="Оставить заявку">Оставить заявку →</a>
-                <a class="btn" id="btnWhatsBudget" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">WhatsApp</a>
+                <a class="btn" id="btnWhatsBudget" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="Написать в Telegram">Telegram</a>
               </div>
             </div>
 
@@ -1277,7 +1277,7 @@
               </p>
               <div class="row">
                 <a class="btn primary" id="btnCallContact" href="tel:+70000000000" aria-label="Позвонить">☎ Позвонить</a>
-                <a class="btn" id="btnWhatsContact" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="WhatsApp">💬 WhatsApp</a>
+                <a class="btn" id="btnWhatsContact" href="https://wa.me/70000000000" target="_blank" rel="noopener" aria-label="Telegram">💬 Telegram</a>
                 <a class="btn ghost" id="btnTgContact" href="https://t.me/USERNAME_PLACEHOLDER" target="_blank" rel="noopener" aria-label="Telegram">✈ Telegram</a>
                 <a class="btn ghost" id="btnRoute" href="#" target="_blank" rel="noopener" aria-label="Построить маршрут">🧭 Маршрут</a>
               </div>
@@ -1286,7 +1286,7 @@
 
             <div class="panel reveal" aria-label="Форма заявки">
               <h3>Заявка (без сервера)</h3>
-              <p>Выберите удобный способ: Mailto или сообщение в WhatsApp с готовым текстом.</p>
+              <p>Выберите удобный способ: VK или сообщение в Telegram с готовым текстом.</p>
 
               <form id="leadForm">
                 <div class="field">
@@ -1304,8 +1304,8 @@
 
                 <div class="form-actions">
                   <button class="btn primary" type="submit" aria-label="Сформировать сообщение">Сформировать</button>
-                  <a class="btn" id="mailtoLink" href="#" aria-label="Отправить по email">✉ Mailto</a>
-                  <a class="btn ghost" id="waLink" href="#" target="_blank" rel="noopener" aria-label="Открыть WhatsApp">💬 WhatsApp</a>
+                  <a class="btn" id="vkLink" href="#" target="_blank" rel="noopener" aria-label="Открыть VK">VK</a>
+                  <a class="btn ghost" id="waLink" href="#" target="_blank" rel="noopener" aria-label="Открыть Telegram">💬 Telegram</a>
                 </div>
 
                 <div class="hint" id="formHint">После “Сформировать” ссылки Mailto/WhatsApp обновятся автоматически.</div>
@@ -1372,7 +1372,7 @@
     <div class="mobileBar" aria-label="Быстрые действия">
       <div class="grid">
         <a class="btn primary" id="mbCall" href="#" aria-label="Позвонить">☎ Позвонить</a>
-        <a class="btn" id="mbWA" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">💬 WhatsApp</a>
+        <a class="btn" id="mbWA" href="#" target="_blank" rel="noopener" aria-label="Telegram">💬 Telegram</a>
         <a class="btn ghost" id="mbRoute" href="#" target="_blank" rel="noopener" aria-label="Маршрут">🧭 Маршрут</a>
       </div>
     </div>
@@ -1383,22 +1383,22 @@
     // BRAND SETTINGS (меняй тут)
     // =========================
     const BRAND = {
-      name: "ОренСпецСервис",
-      topLine: "Оренбург • Ритуальные услуги • 24/7",
-      area: "Оренбург / Оренбургская область",
-      addressText: "Адрес: уточняйте по телефону",
-      phoneDisplay: "+7 (000) 000-00-00",
-      phoneTel: "+70000000000",
-      whatsappNumber: "70000000000",
-      telegramUsername: "USERNAME_PLACEHOLDER",
-      emailTo: "hello@example.com",
-      pagesUrl: "https://rusalylch.github.io/orenspecserviss/",
-      hoursText: "Круглосуточно",
+  name: "ОренСпецСервис",
+  topLine: "Оренбург • Ритуальные услуги • 24/7",
+  area: "Оренбург / Оренбургская область",
+  addressText: "г. Оренбург, ул. Монтажников 29Б",
 
-      // Куда строится маршрут + что показывает карта:
-      // Пример: "Оренбург, ул. Примерная 1" или "Оренбург, ОренСпецСервис"
-      mapDestination: "Оренбург"
-    };
+  phoneDisplay: "+7 (900) 000-00-00",
+  phoneTel: "+79000000000",
+
+  telegramUsername: "lublmkas",                 // <-- твой тег без @
+  vkUrl: "https://vk.com/id716558686",          // <-- твой VK
+  pagesUrl: "https://rusalylch.github.io/orenspecserviss/",
+  hoursText: "Круглосуточно",
+
+  mapDestination: "Оренбург, ул. Монтажников 29Б"
+};
+
 
     // Helpers
     const $ = (s, el=document) => el.querySelector(s);
@@ -1412,9 +1412,19 @@
       $("#btnCallHero").href = `tel:${BRAND.phoneTel}`;
       $("#btnCallContact").href = `tel:${BRAND.phoneTel}`;
 
-      $("#btnWhatsHero").href = `https://wa.me/${BRAND.whatsappNumber}`;
-      $("#btnWhatsContact").href = `https://wa.me/${BRAND.whatsappNumber}`;
-      $("#btnWhatsBudget").href = `https://wa.me/${BRAND.whatsappNumber}`;
+      // Telegram links (вместо WhatsApp)
+const tgUrl = `https://t.me/${BRAND.telegramUsername}`;
+
+$("#btnWhatsHero").href = tgUrl;
+$("#btnWhatsContact").href = tgUrl;
+$("#btnWhatsBudget").href = tgUrl;
+
+$("#btnTgBudget").href = tgUrl;
+$("#btnTgContact").href = tgUrl;
+
+// Mobile bar (средняя кнопка теперь Telegram)
+$("#mbWA").href = tgUrl;
+
 
       $("#btnTgBudget").href = `https://t.me/${BRAND.telegramUsername}`;
       $("#btnTgContact").href = `https://t.me/${BRAND.telegramUsername}`;
@@ -1519,7 +1529,7 @@
     // Form: mailto + WhatsApp text
     function initForm(){
       const form = $("#leadForm");
-      const mailtoLink = $("#mailtoLink");
+      const vkLink = $("#vkLink");
       const waLink = $("#waLink");
       const hint = $("#formHint");
 
@@ -1539,9 +1549,9 @@
       function refreshLinks(){
         const text = buildMessage();
         const subject = `Заявка — ${BRAND.name}`;
-        mailtoLink.href = `mailto:${BRAND.emailTo}?subject=${enc(subject)}&body=${enc(text)}`;
+        vkLink.href = BRAND.vkUrl;
         waLink.href = `https://wa.me/${BRAND.whatsappNumber}?text=${enc(text)}`;
-        hint.textContent = "Ссылки обновлены. Выберите Mailto или WhatsApp.";
+        hint.textContent = "Ссылки обновлены. Выберите VK или Telegram.";
       }
 
       form.addEventListener("submit", (e)=>{
