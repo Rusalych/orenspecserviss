@@ -845,6 +845,20 @@
       .bg-wrap{animation:none}
       #bgCanvas{display:none}
     }
+    
+    /* Большое фото под шапкой — без обрезки */
+.hero-full{
+  width: 100%;
+  background: #000;
+}
+
+.hero-full img{
+  width: 100%;
+  height: auto;          /* не обрезаем */
+  display: block;
+  object-fit: contain;   /* ВСЯ картинка целиком */
+  max-height: 90vh;      /* не больше экрана */
+}
   </style>
 
   <!-- JSON-LD -->
@@ -924,7 +938,11 @@
         </div>
       </div>
     </div>
-  </header>
+  </header>ъ
+  
+  <section class="hero-full">
+  <img src="assets/img/hero-full.png" alt="ОренСпецСервис — похоронный дом">
+</section>
 
   <main id="main">
     <!-- HERO -->
