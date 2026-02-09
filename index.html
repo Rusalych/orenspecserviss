@@ -805,16 +805,20 @@
       .bg-wrap{animation:none}
       #bgCanvas{display:none}
     }
-    /* Hover-подсветка телефонов в шапке */
-#topPhones a {
-  color: rgba(255,255,255,.9);
-  text-decoration: none;
-  transition: color .2s ease, text-shadow .2s ease;
+    /* TOP PHONES — forced hover highlight */
+#topPhones a{
+  display: inline-block;
+  color: rgba(255,255,255,.92) !important;
+  text-decoration: none !important;
+  padding: 2px 6px;
+  border-radius: 10px;
+  transition: color .2s ease, text-shadow .2s ease, background .2s ease;
 }
 
-#topPhones a:hover {
-  color: #ff2a3c;
-  text-shadow: 0 0 8px rgba(255,42,60,.6);
+#topPhones a:hover{
+  color: #ff2a3c !important;
+  background: rgba(255,42,60,.10);
+  text-shadow: 0 0 10px rgba(255,42,60,.75);
 }
   </style>
 
