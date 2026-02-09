@@ -701,8 +701,8 @@
     /* To top */
     .toTop{
       position:fixed;
-      right: 14px;
-      bottom: 92px;
+      right: calc(14px + env(safe-area-inset-right));
+      bottom: calc(92px + env(safe-area-inset-bottom));
       z-index: 90;
       width: 52px;
       height: 52px;
@@ -816,6 +816,23 @@
       .hero-media{transform:none}
       .toTop{bottom: 96px}
       .topPhones a{font-size: 14.5px; padding: 9px 12px;} /* чуть крупнее на мобиле */
+      /* FIX: чтобы правый край не резался и кнопки красиво становились */
+      .navRight{
+     width: 100%;
+     justify-content: space-between;
+     gap: 10px;
+    }
+
+     .navRight .btn{
+     flex: 1 1 auto;      /* кнопки равномерно делятся */
+     min-width: 0;        /* важно: не расширять блок */
+    }
+
+    .burger{
+    flex: 0 0 auto;      /* бургер не растягивается */
+    margin-left: auto;   /* уходит вправо */
+    }
+      
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -1454,13 +1471,14 @@
       });
     }
 
-    function initToTop(){
-      const btn = $("#toTop");
-      if(!btn) return;
-      btn.addEventListener("click", ()=>{
-        document.querySelector("#top")?.scrollIntoView({behavior:"smooth"});
-      });
-    }
+   function initToTop(){
+  const btn = $("#toTop");
+  if(!btn) return;
+
+  btn.addEventListener("click", ()=>{
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  });
+}
 
     function initRouteModal(){
       const modal = $("#routeModal");
