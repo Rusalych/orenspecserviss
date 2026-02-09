@@ -805,6 +805,17 @@
       .bg-wrap{animation:none}
       #bgCanvas{display:none}
     }
+    /* Hover-подсветка телефонов в шапке */
+#topPhones a {
+  color: rgba(255,255,255,.9);
+  text-decoration: none;
+  transition: color .2s ease, text-shadow .2s ease;
+}
+
+#topPhones a:hover {
+  color: #ff2a3c;
+  text-shadow: 0 0 8px rgba(255,42,60,.6);
+}
   </style>
 
   <!-- JSON-LD LocalBusiness -->
@@ -849,6 +860,7 @@
           <span>
             <b>ОренСпецСервис</b>
             <small id="topLine">Оренбург • Ритуальные услуги • Круглосуточно</small>
+            <small id="topPhones"></small>
           </span>
         </a>
 
@@ -1340,6 +1352,9 @@
               <br/><br/>
               <b style="color:rgba(255,255,255,.82)">Реквизиты:</b> добавьте ИНН/ОГРН и юр. данные компании (сейчас заглушка).
               <br/><br/>
+              <b style="color:rgba(255,255,255,.82)">Телефоны:</b>
+              <span id="footerPhones">+7(3532) 61 81 94 • +7(3532) 28 66 88</span>
+              <br/><br/>
               <span style="opacity:.92">© <span id="year"></span> ОренСпецСервис.</span>
             </div>
           </div>
@@ -1416,7 +1431,17 @@
     const enc = encodeURIComponent;
 
     function setBrandBindings(){
-      $("#topLine").textContent = BRAND.topLine;
+
+  $("#topLine").textContent = BRAND.topLine;
+
+if ($("#topPhones")) {
+  $("#topPhones").innerHTML = `
+    <a href="tel:${BRAND.phone1Tel}">${BRAND.phone1Display}</a>
+    <span style="opacity:.6"> • </span>
+    <a href="tel:${BRAND.phone2Tel}">${BRAND.phone2Display}</a>
+  `;
+}
+
 
       // Header phones
       $("#hdrPhone1").textContent = BRAND.phone1Display;
