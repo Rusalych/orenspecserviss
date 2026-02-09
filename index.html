@@ -121,16 +121,14 @@
     }
 
     .mark{
-      width:36px; height:36px; border-radius: 12px;
-      background:
-        radial-gradient(14px 14px at 32% 28%, rgba(255,255,255,.55), transparent 60%),
-        linear-gradient(135deg, rgba(193,18,31,.95), rgba(255,42,60,.50));
-      box-shadow: 0 14px 28px rgba(193,18,31,.15);
-      position:relative;
-      border: 1px solid rgba(255,255,255,.16);
-      flex:0 0 auto;
-      margin-top: 2px;
-    }
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  object-fit:cover;
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 14px 28px rgba(193,18,31,.15);
+  flex: 0 0 auto;
+}
     .mark:after{
       content:"";
       position:absolute; inset:8px 9px;
@@ -886,7 +884,7 @@
     <div class="container">
       <div class="nav">
         <a class="brand" href="#top" aria-label="ОренСпецСервис — на главную">
-          <span class="mark" aria-hidden="true"></span>
+          <img class="mark" src="assets/img/logo.jpg" alt="ОренСпецСервис">
           <span class="brandText">
             <b id="brandName">ОренСпецСервис</b>
             <small id="topLine">Оренбург • Ритуальные услуги • Круглосуточно</small>
